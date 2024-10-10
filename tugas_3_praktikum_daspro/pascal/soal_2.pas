@@ -2,9 +2,6 @@ program pesan_menu_restoran;
 
 uses crt;
 
-label
-    1, 2;
-
 var
     kode, pesan : string;
     harga_makanan, total_harga : longint;
@@ -28,13 +25,8 @@ begin
     writeln('Bubur Ayam dengan kode 10');
 
     write('Apakah anda ingin memesan di sini? (Iya / Tidak) : '); readln(pesan);
-    goto 2;
 
-    1:
-    write('Apakah ingin memesan lagi? (Iya / Tidak) : '); readln(pesan);
-
-    2:
-    if (pesan = 'Iya') or (pesan = 'iya') then
+    repeat
         begin
             write('Silakan input kode : '); readln(kode);
             case (kode) of
@@ -55,10 +47,10 @@ begin
             end;
             write('Berapa jumlah yang ingin anda order? '); readln(jumlah);
             total_harga := total_harga + (harga_makanan * jumlah);
-            goto 1;
-        end
-    else
-        begin
-            writeln('Anda harus membayar Rp', total_harga);
+
+            write('Apakah ingin memesan lagi? (Iya / Tidak) : '); readln(pesan);
         end;
+    until (pesan = 'Tidak') or (pesan = 'tidak');
+
+    writeln('Anda harus membayar Rp', total_harga);
 end.
